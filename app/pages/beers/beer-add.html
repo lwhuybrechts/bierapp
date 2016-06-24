@@ -1,0 +1,32 @@
+<h3>Bier toevoegen</h3>
+<form id="add-beer-form" class="form-horizontal" #addBeerForm="ngForm" (ngSubmit)="addBeer()">
+    <div class="form-group">
+        <label for="name-input" class="col-sm-3 control-label">Name</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="name-input" placeholder="Name" [(ngModel)]="beer.name" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="brewery-input" class="col-sm-3 control-label">Brewery</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="brewery-input" placeholder="Brewery" [(ngModel)]="beer.brewery" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="style-input" class="col-sm-3 control-label">Style</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="style-input" placeholder="Style" [(ngModel)]="beer.style" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="substyle-input" class="col-sm-3 control-label">Substyle</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="substyle-input" placeholder="Substyle" [(ngModel)]="beer.substyle">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-primary">Toevoegen</button>
+        </div>
+    </div>
+</form>

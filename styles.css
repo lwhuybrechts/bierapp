@@ -1,0 +1,55 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+ /*
+  * See https://github.com/angular/angular.io/blob/master/public/docs/_examples/styles.css
+  * for the full set of master styles used by the documentation samples
+  */
+
+#header {
+  padding: 2em;
+}
+#loading {
+  padding: 2em;
+}
+#router-outlet {
+  margin-bottom: 100px;
+  padding: 0 2em;
+}
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0 2em;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+
+  display: flex;
+  align-items: center;
+}
+.beer-row {
+  cursor: pointer;
+}
+.table>tbody>tr>td.beer-row-action {
+  padding: 3px;
+}
+.beer-image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+#add-beer-form {
+  width: 400px;
+}

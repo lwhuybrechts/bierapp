@@ -1,0 +1,24 @@
+<h3>Bieroverzicht</h3>
+<table class="table table-bordered table-hover" *ngIf="beers && beers.length > 0">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Brouwerij</th>
+            <th>Stijl</th>
+            <th>Id</th>
+            <th>Actie</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="beer-row" *ngFor="let beer of beers" (click)="beer.navigate()">
+            <td>{{ beer.name }}</td>
+            <td>{{ beer.brewery }}</td>
+            <td [innerHTML]="beer | beerstyleformatter"></td>
+            <td>{{ beer._id }}</td>
+            <td class="beer-row-action"><div class="btn btn-danger btn-sm" (click)="beer.delete($event)"><span class="glyphicon glyphicon-trash"></span></div></td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="!beers || beers.length === 0">Geen biertjes gevonden</div>
+
+<a href="" [routerLink]="['Add', {}]" class="btn btn-primary">Bier toevoegen</a>
