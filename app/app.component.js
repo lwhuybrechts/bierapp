@@ -14,14 +14,15 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var beersservice_1 = require('./services/beersservice');
+var checkinsservice_1 = require('./services/checkinsservice');
 var header_component_1 = require('./pages/layout/header/header.component');
 var footer_component_1 = require('./pages/layout/footer/footer.component');
 var home_component_1 = require('./pages/home/home.component');
 var beer_list_component_1 = require('./pages/beers/beer-list.component');
 var beer_detail_component_1 = require('./pages/beers/beer-detail.component');
 var beer_add_component_1 = require('./pages/beers/beer-add.component');
-// TODO: get config settings from file
-// export var API_ENDPOINT = 'http://localhost:8080/api/';
+var checkin_list_component_1 = require('./pages/checkins/checkin-list.component');
+var checkin_add_component_1 = require('./pages/checkins/checkin-add.component');
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -33,9 +34,11 @@ var AppComponent = (function () {
         }),
         router_deprecated_1.RouteConfig([
             { path: '/', as: 'Home', component: home_component_1.HomeComponent },
-            { path: '/beers', as: 'Beers', component: beer_list_component_1.BeerListComponent },
-            { path: '/beers/:id', as: 'Beer', component: beer_detail_component_1.BeerDetailComponent },
-            { path: '/beers/add', as: 'Add', component: beer_add_component_1.BeerAddComponent }
+            { path: '/beers', as: 'BeerList', component: beer_list_component_1.BeerListComponent },
+            { path: '/beers/:id', as: 'BeerDetails', component: beer_detail_component_1.BeerDetailComponent },
+            { path: '/beers/add', as: 'BeerAdd', component: beer_add_component_1.BeerAddComponent },
+            { path: '/checkins', as: 'CheckinList', component: checkin_list_component_1.CheckinListComponent },
+            { path: '/checkins/add', as: 'CheckinAdd', component: checkin_add_component_1.CheckinAddComponent }
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -45,8 +48,8 @@ exports.AppComponent = AppComponent;
 platform_browser_dynamic_1.bootstrap(AppComponent, [
     router_deprecated_1.ROUTER_PROVIDERS,
     http_1.HTTP_PROVIDERS,
-    //provide(API_ENDPOINT, { useValue: 'http://localhost:8080/api/' }),
     beersservice_1.BeersService,
+    checkinsservice_1.CheckinsService,
     core_1.provide(common_1.LocationStrategy, { useClass: common_1.HashLocationStrategy })
 ]);
 //# sourceMappingURL=app.component.js.map

@@ -26,7 +26,7 @@ export class BeerAddComponent {
 
     public addBeer() {
         this._beersService.createBeer(this.beer).subscribe(beers => {
-            this._router.navigate(['Beers', { }]);
+            this._router.navigate(['BeerList', { }]);
         });
     }
 }

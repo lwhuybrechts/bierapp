@@ -10,46 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var beer_1 = require('../models/beer');
+var checkin_1 = require('../models/checkin');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/Rx');
 exports.API_ENDPOINT = 'http://localhost:8080/api';
-var BeersService = (function () {
-    function BeersService(http) {
+var CheckinsService = (function () {
+    function CheckinsService(http) {
         this._http = http;
         this._apiEndpoint = exports.API_ENDPOINT;
     }
-    BeersService.prototype.getBeers = function () {
-        return this.mapBeersReponse(this._http.get(exports.API_ENDPOINT + "/beers"));
+    CheckinsService.prototype.getCheckins = function () {
+        return this.mapCheckinsReponse(this._http.get(exports.API_ENDPOINT + "/checkins"));
     };
-    BeersService.prototype.getBeerById = function (id) {
-        return this.getBeers().map(function (beers) { return beers.find(function (beer) { return beer._id === id; }); }).first();
+    CheckinsService.prototype.getCheckinById = function (id) {
+        return this.getCheckins().map(function (checkins) { return checkins.find(function (checkin) { return checkin._id === id; }); }).first();
     };
-    BeersService.prototype.getBeersByIds = function (ids) {
-        return this.getBeers().map(function (beers) { return beers.filter(function (beer) { return ids.indexOf(beer._id) > -1; }); });
+    CheckinsService.prototype.getCheckinsByBeerId = function (beerId) {
+        return this.getCheckins().map(function (checkins) { return checkins.filter(function (checkin) { return checkin.beerId === beerId; }); });
     };
-    BeersService.prototype.createBeer = function (beer) {
+    CheckinsService.prototype.createCheckin = function (checkin) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.mapBeersReponse(this._http.post(exports.API_ENDPOINT + "/beers", JSON.stringify(beer), options));
+        return this.mapCheckinsReponse(this._http.post(exports.API_ENDPOINT + "/checkins", JSON.stringify(checkin), options));
     };
-    BeersService.prototype.deleteBeer = function (beerId) {
-        return this.mapBeersReponse(this._http.delete(exports.API_ENDPOINT + "/beers/" + beerId));
-    };
-    BeersService.prototype.mapBeersReponse = function (response) {
+    CheckinsService.prototype.mapCheckinsReponse = function (response) {
         return response.map(function (resp) { return resp.json(); })
-            .map(function (beersJson) { return beersJson.map(function (beerJson) { return new beer_1.Beer(beerJson); }); })
+            .map(function (checkinsJson) { return checkinsJson.map(function (checkinJson) { return new checkin_1.Checkin(checkinJson); }); })
             .catch(this.handleError);
     };
-    BeersService.prototype.handleError = function (error) {
+    CheckinsService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
-    BeersService = __decorate([
+    CheckinsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], BeersService);
-    return BeersService;
+    ], CheckinsService);
+    return CheckinsService;
 }());
-exports.BeersService = BeersService;
-//# sourceMappingURL=beersservice.js.map
+exports.CheckinsService = CheckinsService;
+//# sourceMappingURL=checkinsservice.js.map

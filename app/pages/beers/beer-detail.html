@@ -4,16 +4,27 @@
         <img class="beer-image" [src]="beer.image" />
         <table class="table table-bordered">
             <tr>
-                <td>Brouwerij:</td>
+                <th>Brouwerij:</th>
                 <td>{{ beer.brewery }}</td>
             </tr>
             <tr>
-                <td>Stijl:</td>
+                <th>Stijl:</th>
                 <td><span [innerHTML]="beer | beerstyleformatter"></span></td>
             </tr>
             <tr>
-                <td>Id:</td>
+                <th>Id:</th>
                 <td>{{ beer._id }}</td>
+            </tr>
+            <tr>
+                <th>Aantal checkins:</th>
+                <td>{{ checkins.length }}</td>
+            </tr>
+            <tr>
+                <th>Gemiddelde rating:</th>
+                <td>
+                    <span *ngIf="checkins.length > 0">{{ checkins | averageratingformatter }}</span>
+                    <span *ngIf="checkins.length === 0">Geen ratings</span>
+                </td>
             </tr>
         </table>
     </div>

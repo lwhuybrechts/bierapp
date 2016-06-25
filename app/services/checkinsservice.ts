@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Beer } from '../models/beer';
+import { Checkin } from '../models/checkin';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 //import 'rxjs/add/operator/map';
@@ -9,7 +9,7 @@ import 'rxjs/Rx';
 export var API_ENDPOINT = 'http://localhost:8080/api';
 
 @Injectable()
-export class BeersService {
+export class CheckinsService {
     private _http: Http;
     private _apiEndpoint: string;
 
@@ -18,32 +18,28 @@ export class BeersService {
         this._apiEndpoint = API_ENDPOINT; //apiEndpoint;
     }
 
-    public getBeers(): Observable<Beer[]> {
-        return this.mapBeersReponse(this._http.get(`${API_ENDPOINT}/beers`));
+    public getCheckins(): Observable<Checkin[]> {
+        return this.mapCheckinsReponse(this._http.get(`${API_ENDPOINT}/checkins`));
     }
 
-    public getBeerById(id: string): Observable<Beer> {
-        return this.getBeers().map(beers => beers.find(beer => beer._id === id)).first();
+    public getCheckinById(id: string): Observable<Checkin> {
+        return this.getCheckins().map(checkins => checkins.find(checkin => checkin._id === id)).first();
     }
 
-    public getBeersByIds(ids: string[]): Observable<Beer[]> {
-        return this.getBeers().map(beers => beers.filter(beer => ids.indexOf(beer._id) > -1));
+    public getCheckinsByBeerId(beerId: string): Observable<Checkin[]> {
+        return this.getCheckins().map(checkins => checkins.filter(checkin => checkin.beerId === beerId));
     }
 
-    public createBeer(beer: Beer): Observable<Beer[]> {
+    public createCheckin(checkin: Checkin): Observable<Checkin[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         
-        return this.mapBeersReponse(this._http.post(`${API_ENDPOINT}/beers`, JSON.stringify(beer), options));
+        return this.mapCheckinsReponse(this._http.post(`${API_ENDPOINT}/checkins`, JSON.stringify(checkin), options));
     }
 
-    public deleteBeer(beerId: string): Observable<Beer[]> {
-        return this.mapBeersReponse(this._http.delete(`${API_ENDPOINT}/beers/${ beerId }`));
-    }
-
-    private mapBeersReponse(response: Observable<Response>): Observable<Beer[]> {
+    private mapCheckinsReponse(response: Observable<Response>): Observable<Checkin[]> {
         return response.map(resp => <any[]>resp.json())
-            .map(beersJson => beersJson.map(beerJson => new Beer(beerJson)))
+            .map(checkinsJson => checkinsJson.map(checkinJson => new Checkin(checkinJson)))
             .catch(this.handleError);
     }
 

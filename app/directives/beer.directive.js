@@ -35,14 +35,14 @@ var BeerDirective = (function (_super) {
         configurable: true
     });
     BeerDirective.prototype.navigate = function () {
-        this._router.navigate(['Beer', { id: this._id }]);
+        this._router.navigate(['BeerDetails', { id: this._id }]);
     };
     BeerDirective.prototype.delete = function (event) {
         var _this = this;
         event.stopPropagation();
         if (confirm("Weet je zeker dat je \"" + this.name + "\" wil weggooien?")) {
             this._beersService.deleteBeer(this._id).subscribe(function (beers) {
-                _this.deleted.next(_this._id);
+                _this.deleted.emit(_this._id);
             });
         }
     };

@@ -27,7 +27,7 @@ var BeerAddComponent = (function () {
     BeerAddComponent.prototype.addBeer = function () {
         var _this = this;
         this._beersService.createBeer(this.beer).subscribe(function (beers) {
-            _this._router.navigate(['Beers', {}]);
+            _this._router.navigate(['BeerList', {}]);
         });
     };
     BeerAddComponent = __decorate([

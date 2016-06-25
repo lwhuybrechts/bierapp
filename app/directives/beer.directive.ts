@@ -28,7 +28,7 @@ export class BeerDirective extends Beer {
     }
 
     public navigate() {
-        this._router.navigate(['Beer', { id: this._id }]);
+        this._router.navigate(['BeerDetails', { id: this._id }]);
     }
 
     public delete(event: Event) {
@@ -36,7 +36,7 @@ export class BeerDirective extends Beer {
 
         if (confirm(`Weet je zeker dat je "${this.name}" wil weggooien?`)) {
             this._beersService.deleteBeer(this._id).subscribe(beers => {
-                this.deleted.next(this._id);
+                this.deleted.emit(this._id);
             });
         }
     }

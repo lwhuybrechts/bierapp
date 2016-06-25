@@ -10,41 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
+var checkinsservice_1 = require('../../services/checkinsservice');
 var beersservice_1 = require('../../services/beersservice');
+var checkin_1 = require('../../models/checkin');
 var beer_directive_1 = require('../../directives/beer.directive');
-var beerstyleformatter_1 = require('../../pipes/beerstyleformatter');
-var BeerListComponent = (function () {
-    function BeerListComponent(beersService, router) {
+var CheckinAddComponent = (function () {
+    function CheckinAddComponent(checkinsService, beersService, router, routeParams) {
         var _this = this;
         this.beers = [];
+        this.checkin = new checkin_1.Checkin({
+            _id: 0,
+            beerId: 0,
+            comment: "",
+            rating: 0
+        });
+        this._checkinsService = checkinsService;
+        this._router = router;
         beersService.getBeers().subscribe(function (beers) {
             if (!beers || Object.prototype.toString.call(beers) !== '[object Array]')
                 return;
             beers.forEach(function (beer) {
-                var beerDirective = new beer_directive_1.BeerDirective(beersService, beer, router);
-                beerDirective.deleted.subscribe(function (id) { return _this.removeBeerFromList(id); });
-                _this.beers.push(beerDirective);
+                _this.beers.push(new beer_directive_1.BeerDirective(beersService, beer, router));
             });
         });
     }
-    BeerListComponent.prototype.removeBeerFromList = function (id) {
+    CheckinAddComponent.prototype.addCheckin = function () {
         var _this = this;
-        this.beers.forEach(function (beer) {
-            if (beer._id === id) {
-                var index = _this.beers.indexOf(beer);
-                _this.beers.splice(index, 1);
-            }
+        this._checkinsService.createCheckin(this.checkin).subscribe(function (checkins) {
+            _this._router.navigate(['CheckinList', {}]);
         });
     };
-    BeerListComponent = __decorate([
+    CheckinAddComponent = __decorate([
         core_1.Component({
-            templateUrl: 'app/pages/beers/beer-list.html',
-            directives: [router_deprecated_1.RouterLink],
-            pipes: [beerstyleformatter_1.BeerStyleFormatter],
+            templateUrl: 'app/pages/checkins/checkin-add.html'
         }), 
-        __metadata('design:paramtypes', [beersservice_1.BeersService, router_deprecated_1.Router])
-    ], BeerListComponent);
-    return BeerListComponent;
+        __metadata('design:paramtypes', [checkinsservice_1.CheckinsService, beersservice_1.BeersService, router_deprecated_1.Router, router_deprecated_1.RouteParams])
+    ], CheckinAddComponent);
+    return CheckinAddComponent;
 }());
-exports.BeerListComponent = BeerListComponent;
-//# sourceMappingURL=beer-list.component.js.map
+exports.CheckinAddComponent = CheckinAddComponent;
+//# sourceMappingURL=checkin-add.component.js.map

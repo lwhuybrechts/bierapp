@@ -20,6 +20,10 @@ h1 {
 #header {
   padding: 2em;
 }
+#header .router-link-active {
+  color: #000;
+  text-decoration: none;
+}
 #loading {
   padding: 2em;
 }
@@ -50,6 +54,6 @@ h1 {
   height: 200px;
   margin-bottom: 20px;
 }
-#add-beer-form {
+#add-beer-form, #add-checkin-form {
   width: 400px;
 }

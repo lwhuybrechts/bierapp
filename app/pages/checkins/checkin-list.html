@@ -1,0 +1,13 @@
+<h3>Checkinoverzicht</h3>
+<div *ngFor="let checkin of checkins" class="panel panel-default">
+    <div class="panel-body">
+        <div *ngIf="checkin.beer">Bier <a href="" [routerLink]="['BeerDetails', { id: checkin.beer._id }]"><strong>{{ checkin.beer.name }}</strong></a> door brouwerij <strong>{{ checkin.beer.brewery }}</strong></div>
+        <div *ngIf="!checkin.beer">Bier <strong>{{ checkin.beerId }}</strong> bestaat niet meer</div>
+        <div class="well">
+            <div>{{ checkin.comment }}</div>
+            <div>Rating: {{ checkin.rating }}</div>
+        </div>
+    </div>
+    <div class="panel-footer">{{ checkin.createdAt | dateformatter }}</div>
+</div>
+<div *ngIf="!checkins || checkins.length === 0">Geen checkins gevonden</div>

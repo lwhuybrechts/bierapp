@@ -20,11 +20,9 @@ export class BeerListComponent {
                 return;
 
             beers.forEach(beer => {
-                var beerPartial = new BeerDirective(beersService, beer, router);
-                beerPartial.deleted.subscribe(id => {
-                    this.removeBeerFromList(id);
-                });
-                this.beers.push(beerPartial);
+                var beerDirective = new BeerDirective(beersService, beer, router);
+                beerDirective.deleted.subscribe((id: string) => this.removeBeerFromList(id));
+                this.beers.push(beerDirective);
             });
         });
     }
